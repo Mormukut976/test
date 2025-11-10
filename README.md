@@ -7,7 +7,7 @@ A comprehensive Azure DevOps course with 200 interview questions and certificate
 - 200+ Azure DevOps interview questions with detailed answers
 - Progress tracking
 - Professional certificate generation
-- Valid until June 2070
+- Valid until June 2027
 - Downloadable certificates
 - Secure login system
 
