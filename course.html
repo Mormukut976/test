@@ -1,0 +1,1897 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Azure DevOps Course - 200 Interview Questions</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #0078d4;
+            --secondary: #00bcf2;
+            --accent: #ffb900;
+            --dark: #1a1a1a;
+            --light: #f5f5f5;
+            --success: #107c10;
+            --danger: #e81123;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo i {
+            font-size: 2.5rem;
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .progress-container {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px 20px;
+            border-radius: 50px;
+        }
+
+        .progress-text {
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .progress-bar {
+            width: 200px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--accent);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        /* Navigation */
+        .course-nav {
+            background: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 80px;
+            z-index: 99;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .nav-btn {
+            padding: 8px 16px;
+            background: var(--light);
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .nav-btn:hover {
+            background: #e9ecef;
+        }
+
+        .search-box {
+            display: flex;
+            gap: 10px;
+        }
+
+        .search-box input {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 250px;
+        }
+
+        /* Course Content */
+        .course-content {
+            padding: 40px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .section-title p {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .questions-container {
+            display: grid;
+            gap: 20px;
+        }
+
+        .question-card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+            border-left: 4px solid var(--primary);
+        }
+
+        .question-card.completed {
+            border-left-color: var(--success);
+            background: #f8fff8;
+        }
+
+        .question-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .question-number {
+            background: var(--primary);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .question-card.completed .question-number {
+            background: var(--success);
+        }
+
+        .question-text {
+            flex: 1;
+            margin-left: 15px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .answer-section {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        .answer-toggle {
+            background: var(--light);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: 600;
+            color: var(--primary);
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .answer-toggle:hover {
+            background: #e9ecef;
+        }
+
+        .answer-content {
+            margin-top: 15px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 3px solid var(--success);
+            display: none;
+        }
+
+        .answer-content.show {
+            display: block;
+        }
+
+        .completion-section {
+            text-align: center;
+            padding: 60px 0;
+            background: white;
+            border-radius: 15px;
+            margin-top: 40px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .completion-section h3 {
+            font-size: 2rem;
+            color: var(--success);
+            margin-bottom: 20px;
+        }
+
+        .completion-section p {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .certificate-btn {
+            background: linear-gradient(135deg, var(--success), #0d6b0d);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(16, 124, 16, 0.3);
+        }
+
+        .certificate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(16, 124, 16, 0.4);
+        }
+
+        /* Certificate Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            max-width: 800px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .certificate-form {
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .generate-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .generate-btn:hover {
+            background: var(--secondary);
+        }
+
+        .certificate-preview {
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 40px;
+            background: linear-gradient(135deg, #f9f9f9, #ffffff);
+            text-align: center;
+            display: none;
+        }
+
+        .certificate-preview.show {
+            display: block;
+        }
+
+        .certificate-header {
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        .certificate-header h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .certificate-body {
+            padding: 30px 0;
+        }
+
+        .certificate-body h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+
+        .student-name {
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin: 20px 0;
+            font-weight: 700;
+        }
+
+        .certificate-details {
+            margin: 30px 0;
+            text-align: left;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .signature-area {
+            margin-top: 50px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .signature {
+            text-align: center;
+        }
+
+        .signature-img {
+            height: 80px;
+            margin-bottom: 10px;
+            opacity: 0.8;
+        }
+
+        .signature-line {
+            width: 200px;
+            height: 1px;
+            background: #333;
+            margin: 40px auto 10px;
+        }
+
+        .download-btn {
+            background: var(--success);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 20px;
+        }
+
+        .download-btn:hover {
+            background: #0d6b0d;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 40px 0 20px;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column a {
+            color: #ccc;
+            text-decoration: none;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            color: #999;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .progress-bar {
+                width: 150px;
+            }
+
+            .question-header {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .question-text {
+                margin-left: 0;
+            }
+
+            .signature-area {
+                flex-direction: column;
+                gap: 30px;
+            }
+
+            .nav-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .search-box input {
+                width: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-cloud"></i>
+                    <h1>Azure DevOps Master</h1>
+                </div>
+                <div class="user-info">
+                    <div class="progress-container">
+                        <div class="progress-text">Course Progress: <span id="progressPercent">0%</span></div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="course-nav">
+        <div class="container nav-container">
+            <div class="nav-buttons">
+                <button class="nav-btn" onclick="markAllRead()">
+                    <i class="fas fa-check-double"></i> Mark All Read
+                </button>
+                <button class="nav-btn" onclick="scrollToTop()">
+                    <i class="fas fa-arrow-up"></i> Top
+                </button>
+            </div>
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Search questions...">
+                <button class="nav-btn" onclick="searchQuestions()">
+                    <i class="fas fa-search"></i> Search
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Course Content -->
+    <section class="course-content">
+        <div class="container">
+            <div class="section-title">
+                <h2>Azure DevOps Interview Questions</h2>
+                <p>Master 200 essential interview questions to crack your next Azure DevOps interview</p>
+            </div>
+
+            <div class="questions-container" id="questionsContainer">
+                <!-- Questions will be loaded here by JavaScript -->
+            </div>
+
+            <div class="completion-section" id="completionSection" style="display: none;">
+                <h3><i class="fas fa-trophy"></i> Course Completed!</h3>
+                <p>Congratulations! You have successfully completed all 200 Azure DevOps interview questions. You are now ready to download your certificate.</p>
+                <button class="certificate-btn" onclick="showCertificateModal()">
+                    <i class="fas fa-download"></i> GET YOUR CERTIFICATE
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certificate Modal -->
+    <div class="modal" id="certificateModal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeCertificateModal()">&times;</button>
+            <h2>Generate Your Certificate</h2>
+            
+            <div class="certificate-form" id="certificateForm">
+                <div class="form-group">
+                    <label for="studentName">Full Name</label>
+                    <input type="text" id="studentName" placeholder="Enter your full name" required>
+                </div>
+                <div class="form-group">
+                    <label for="studentEmail">Email Address</label>
+                    <input type="email" id="studentEmail" placeholder="Enter your email" required>
+                </div>
+                <button class="generate-btn" onclick="generateCertificate()">
+                    <i class="fas fa-certificate"></i> GENERATE CERTIFICATE
+                </button>
+            </div>
+
+            <div class="certificate-preview" id="certificatePreview">
+                <div class="certificate-header">
+                    <h2>CERTIFICATE OF COMPLETION</h2>
+                    <p>This is to certify that</p>
+                </div>
+                
+                <div class="certificate-body">
+                    <h3>Azure DevOps Master Course</h3>
+                    <div class="student-name" id="certificateName">[Student Name]</div>
+                    <p>has successfully completed the comprehensive Azure DevOps course</p>
+                    <p>covering 200+ interview questions and practical scenarios</p>
+                    
+                    <div class="certificate-details">
+                        <div class="detail-row">
+                            <span>Date of Completion:</span>
+                            <span id="completionDate">08 Nov 2025</span>
+                        </div>
+                        <div class="detail-row">
+                            <span>Certificate ID:</span>
+                            <span id="certificateId">AZD-2025-001</span>
+                        </div>
+                        <div class="detail-row">
+                            <span>Valid Until:</span>
+                            <span>30 June 2070</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="signature-area">
+                    <div class="signature">
+                        <div class="signature-line"></div>
+                        <p>Course Director</p>
+                        <p>Dr. Michael Anderson</p>
+                    </div>
+                    <div class="signature">
+                        <div class="signature-line"></div>
+                        <p>TechMaster CEO</p>
+                        <p>Sarah Johnson</p>
+                    </div>
+                </div>
+                
+                <button class="download-btn" onclick="downloadCertificate()">
+                    <i class="fas fa-download"></i> DOWNLOAD CERTIFICATE
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>TechMaster</h3>
+                    <p>Professional IT certification courses to advance your career in cloud technologies.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> support@techmaster.com</li>
+                        <li><i class="fas fa-phone"></i> +91 98765 43210</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Mumbai, India</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2025 TechMaster. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Complete 200 Azure DevOps Interview Questions
+        const azureDevOpsQuestions = [
+            // Questions 1-50
+            {
+                id: 1,
+                question: "What is Azure DevOps and what are its key components?",
+                answer: "Azure DevOps is a Microsoft product that provides version control, reporting, requirements management, project management, automated builds, testing, and release management capabilities. Key components include: Azure Boards (work tracking), Azure Repos (source code repositories), Azure Pipelines (CI/CD), Azure Test Plans (testing tools), and Azure Artifacts (package management)."
+            },
+            {
+                id: 2,
+                question: "Explain the difference between Azure DevOps Services and Azure DevOps Server.",
+                answer: "Azure DevOps Services is the cloud-hosted offering (SaaS) managed by Microsoft, while Azure DevOps Server (formerly Team Foundation Server) is the on-premises version that organizations can deploy in their own data centers. The cloud version receives updates more frequently and requires no infrastructure management."
+            },
+            {
+                id: 3,
+                question: "What are Azure Pipelines and what types of pipelines are available?",
+                answer: "Azure Pipelines is a cloud service for automatically building and testing code projects. It supports two types of pipelines: 1) Build Pipeline (CI) - compiles code, runs tests, and produces artifacts, 2) Release Pipeline (CD) - deploys artifacts to various environments. Pipelines can be defined using YAML or the classic visual designer."
+            },
+            {
+                id: 4,
+                question: "How do you secure Azure DevOps projects?",
+                answer: "Security in Azure DevOps is managed through: 1) Azure Active Directory integration, 2) Role-based access control (RBAC), 3) Security groups and permissions, 4) Branch policies in Git repositories, 5) Pipeline security with approval gates, 6) Secure files for storing secrets, and 7) Service connections with limited permissions."
+            },
+            {
+                id: 5,
+                question: "What are Azure DevOps Artifacts and how are they used?",
+                answer: "Azure Artifacts is a package management system that allows teams to create, host, and share packages. It supports multiple package types including NuGet, npm, Maven, Python, and Universal Packages. Artifacts are used to store build outputs, dependencies, and other binary files that can be consumed by builds and releases."
+            },
+            {
+                id: 6,
+                question: "Explain the concept of Service Connections in Azure DevOps.",
+                answer: "Service Connections are secure connections between Azure DevOps and external services like Azure subscriptions, Docker registries, GitHub, or other CI/CD tools. They store authentication information and are used by pipelines to deploy to targets, access packages, or integrate with other services."
+            },
+            {
+                id: 7,
+                question: "What is the difference between Microsoft-hosted and self-hosted agents?",
+                answer: "Microsoft-hosted agents are managed by Microsoft and provide a clean environment for each run, with pre-installed software. Self-hosted agents are installed and managed by users on their own infrastructure, providing more control over environment configuration, installed software, and network access."
+            },
+            {
+                id: 8,
+                question: "How do you manage secrets in Azure DevOps pipelines?",
+                answer: "Secrets can be managed using: 1) Azure Key Vault integration, 2) Pipeline variables marked as secret, 3) Secure files library, 4) Variable groups with secret values. Secrets are encrypted and never logged in plain text during pipeline execution."
+            },
+            {
+                id: 9,
+                question: "What are YAML pipelines and what are their advantages?",
+                answer: "YAML pipelines are defined as code using YAML syntax in a file (azure-pipelines.yml) stored with the source code. Advantages include: version control for pipeline definitions, code review capabilities, easier branching strategies, and the ability to template common tasks and configurations."
+            },
+            {
+                id: 10,
+                question: "How do you implement CI/CD for multiple environments?",
+                answer: "Multi-environment CI/CD can be implemented using: 1) Multiple stages in release pipelines, 2) Environment-specific variable groups, 3) Approval gates between environments, 4) Deployment strategies (blue-green, canary), 5) Feature flags for controlled rollouts."
+            },
+            {
+                id: 11,
+                question: "What are Azure DevOps Boards and what work item types are available?",
+                answer: "Azure Boards provides work tracking tools including backlogs, boards, and dashboards. Available work item types include: Epic, Feature, User Story, Task, Bug, and Issue. Each type has different purposes and fields for tracking work at different levels of detail."
+            },
+            {
+                id: 12,
+                question: "Explain Git branching strategies in Azure DevOps.",
+                answer: "Common Git branching strategies include: 1) GitFlow (feature, develop, release, hotfix, main branches), 2) GitHub Flow (simple main and feature branches), 3) Trunk-Based Development (short-lived feature branches). Azure DevOps supports branch policies to enforce code quality and review requirements."
+            },
+            {
+                id: 13,
+                question: "What are Azure DevOps Test Plans and how are they used?",
+                answer: "Azure Test Plans provides browser-based test management solution. It includes: 1) Test case management, 2) Manual testing with rich client, 3) Exploratory testing, 4) User acceptance testing, 5) Test analytics and reporting. Test Plans integrate with Azure Boards for requirement tracking."
+            },
+            {
+                id: 14,
+                question: "How do you implement infrastructure as code with Azure DevOps?",
+                answer: "Infrastructure as Code can be implemented using: 1) ARM templates with Azure Resource Manager deployment tasks, 2) Terraform with custom tasks, 3) PowerShell/DSC scripts, 4) Bicep templates. These can be executed in Azure Pipelines to provision and manage cloud resources."
+            },
+            {
+                id: 15,
+                question: "What is Azure DevOps REST API and what can it be used for?",
+                answer: "Azure DevOps REST API provides programmatic access to Azure DevOps services. It can be used for: 1) Automating project creation, 2) Querying work items, 3) Managing build and release pipelines, 4) Integrating with external tools, 5) Custom reporting and dashboards."
+            },
+            {
+                id: 16,
+                question: "How do you implement approval gates in release pipelines?",
+                answer: "Approval gates can be configured in release pipelines to: 1) Require manual approvals before deployment, 2) Integrate with external systems (ServiceNow, Jira), 3) Check Azure Monitor alerts, 4) Validate work items, 5) Execute Azure Functions. Gates help ensure quality and compliance."
+            },
+            {
+                id: 17,
+                question: "What are variable groups in Azure DevOps?",
+                answer: "Variable groups are sets of named values that can be referenced in pipelines. They provide: 1) Centralized configuration management, 2) Environment-specific variables, 3) Secure storage of secrets, 4) Reuse across multiple pipelines, 5) Integration with Azure Key Vault for enhanced security."
+            },
+            {
+                id: 18,
+                question: "Explain deployment groups in Azure DevOps.",
+                answer: "Deployment groups are logical sets of deployment target machines with agents. They enable: 1) Physical deployment target management, 2) Rolling deployments, 3) Canary releases, 4) Health checks, 5) Deployment history tracking. Each machine in a deployment group runs a deployment agent."
+            },
+            {
+                id: 19,
+                question: "What are Azure DevOps extensions and how are they used?",
+                answer: "Azure DevOps extensions are add-ons that enhance functionality. They can: 1) Add new build/release tasks, 2) Integrate with third-party tools, 3) Provide custom widgets for dashboards, 4) Enhance work item tracking. Extensions are available from Visual Studio Marketplace."
+            },
+            {
+                id: 20,
+                question: "How do you implement blue-green deployment with Azure DevOps?",
+                answer: "Blue-green deployment involves maintaining two identical environments. Implementation steps: 1) Deploy to inactive environment, 2) Run health checks, 3) Switch traffic using load balancer/App Gateway, 4) Monitor new environment, 5) Rollback if issues occur. Azure DevOps pipelines can automate this process."
+            },
+            {
+                id: 21,
+                question: "What is Azure DevOps CLI and what commands are available?",
+                answer: "Azure DevOps CLI provides command-line interface for Azure DevOps. Available commands include: az boards (work items), az repos (Git repositories), az pipelines (build/release), az artifacts (package management), az devops (project/team management)."
+            },
+            {
+                id: 22,
+                question: "How do you implement code coverage in Azure Pipelines?",
+                answer: "Code coverage can be implemented by: 1) Configuring test tasks to collect coverage data, 2) Using coverage tools (Coverlet, Jacoco), 3) Publishing coverage reports, 4) Setting quality gates, 5) Integrating with SonarQube. Coverage thresholds can fail builds if not met."
+            },
+            {
+                id: 23,
+                question: "What are Azure DevOps dashboards and how are they customized?",
+                answer: "Azure DevOps dashboards provide visual summaries of project status. They can be customized with: 1) Built-in widgets (charts, queries), 2) Markdown widgets, 3) Extension widgets, 4) Team-specific views, 5) Conditional formatting. Dashboards help teams monitor progress and quality."
+            },
+            {
+                id: 24,
+                question: "Explain Azure DevOps integration with GitHub.",
+                answer: "Azure DevOps integrates with GitHub through: 1) GitHub repositories as code sources, 2) GitHub triggers for pipelines, 3) GitHub pull request status updates, 4) GitHub checks integration, 5) Azure Boards-GitHub integration for work item linking. This enables using GitHub with Azure DevOps CI/CD."
+            },
+            {
+                id: 25,
+                question: "What are pipeline templates in Azure DevOps?",
+                answer: "Pipeline templates are reusable YAML files that define common pipeline logic. They enable: 1) Standardization across projects, 2) Reduced duplication, 3) Centralized updates, 4) Parameterization for flexibility, 5) Template libraries for organization-wide reuse."
+            },
+            {
+                id: 26,
+                question: "How do you implement security scanning in Azure Pipelines?",
+                answer: "Security scanning can be implemented using: 1) SAST tools (SonarQube, Checkmarx), 2) DAST tools (OWASP ZAP), 3) Container scanning (Trivy, Aqua), 4) Dependency scanning (WhiteSource, Snyk), 5) Secret detection (GitLeaks). These tools integrate via pipeline tasks."
+            },
+            {
+                id: 27,
+                question: "What are Azure DevOps wiki and how are they used?",
+                answer: "Azure DevOps wiki provides documentation capabilities with: 1) Project wiki (shared documentation), 2) Code wiki (documentation in repository), 3) Markdown support, 4) Version history, 5) Search functionality. Wikis help teams maintain project documentation and knowledge bases."
+            },
+            {
+                id: 28,
+                question: "Explain Azure DevOps integration with Azure Monitor.",
+                answer: "Azure DevOps integrates with Azure Monitor for: 1) Release gate approvals based on alerts, 2) Pipeline analytics and dashboards, 3) Application performance monitoring integration, 4) Log analytics queries in pipelines, 5) Alert rules for pipeline failures."
+            },
+            {
+                id: 29,
+                question: "What are pipeline artifacts and how do they differ from Azure Artifacts?",
+                answer: "Pipeline artifacts are build outputs published by pipelines for consumption in release pipelines. Azure Artifacts are package management for dependencies. Pipeline artifacts are temporary build results, while Azure Artifacts are versioned packages stored long-term."
+            },
+            {
+                id: 30,
+                question: "How do you implement canary releases with Azure DevOps?",
+                answer: "Canary releases involve gradual traffic shifting. Implementation: 1) Deploy to small percentage of users, 2) Monitor metrics and errors, 3) Gradually increase traffic, 4) Rollback if issues detected. Azure DevOps can automate this using deployment strategies and health checks."
+            },
+            {
+                id: 31,
+                question: "What is Azure DevOps Services REST API versioning?",
+                answer: "Azure DevOps REST API uses versioning through API version parameter. Different versions provide: 1) Backward compatibility, 2) New features and endpoints, 3) Deprecation notices for old versions, 4) Migration guidance. Always use the latest stable version for new development."
+            },
+            {
+                id: 32,
+                question: "How do you implement feature flags with Azure DevOps?",
+                answer: "Feature flags can be implemented using: 1) Azure App Configuration service, 2) LaunchDarkly integration, 3) Custom configuration management, 4) Environment-specific variables. Feature flags enable controlled feature rollouts and A/B testing."
+            },
+            {
+                id: 33,
+                question: "What are Azure DevOps project structure best practices?",
+                answer: "Best practices include: 1) Separate projects for different business units, 2) Team-specific areas and iterations, 3) Consistent naming conventions, 4) Appropriate permission levels, 5) Regular cleanup of stale work items and pipelines."
+            },
+            {
+                id: 34,
+                question: "Explain Azure DevOps integration with Docker.",
+                answer: "Azure DevOps integrates with Docker through: 1) Docker tasks in pipelines, 2) Container registry service connections, 3) Dockerfile builds, 4) Image scanning, 5) Kubernetes deployment. This enables full containerized application CI/CD."
+            },
+            {
+                id: 35,
+                question: "What are Azure DevOps audit logs and how are they accessed?",
+                answer: "Azure DevOps audit logs track user and system activities. They can be accessed through: 1) Organization settings > Auditing, 2) REST API, 3) Power BI integration. Audit logs help with compliance, security monitoring, and troubleshooting."
+            },
+            {
+                id: 36,
+                question: "How do you implement performance testing in Azure Pipelines?",
+                answer: "Performance testing can be implemented using: 1) Apache JMeter tasks, 2) Visual Studio load testing, 3) Artillery.io integration, 4) Custom performance scripts, 5) Integration with Application Insights for results analysis."
+            },
+            {
+                id: 37,
+                question: "What are Azure DevOps team settings and how are they configured?",
+                answer: "Team settings include: 1) Team area paths and iterations, 2) Backlog and board configuration, 3) Notification settings, 4) Dashboards, 5) Security groups. These are configured in Project Settings > Teams for each team."
+            },
+            {
+                id: 38,
+                question: "Explain Azure DevOps integration with Power BI.",
+                answer: "Azure DevOps integrates with Power BI through: 1) OData feed for work items, 2) Analytics views, 3) Pre-built reports and dashboards, 4) Custom queries and measures. This enables advanced reporting and data visualization."
+            },
+            {
+                id: 39,
+                question: "What are Azure DevOps repository policies?",
+                answer: "Repository policies enforce code quality and include: 1) Required reviewers, 2) Minimum number of reviewers, 3) Work item linking requirement, 4) Comment resolution requirement, 5) Build policy (required successful builds), 6) Status policy checks."
+            },
+            {
+                id: 40,
+                question: "How do you implement database deployments with Azure DevOps?",
+                answer: "Database deployments can be implemented using: 1) SQL Server Data Tools (SSDT), 2) Entity Framework migrations, 3) Flyway/Liquibase, 4) Custom SQL scripts, 5) Azure SQL Database deployment tasks. Always use idempotent scripts and test thoroughly."
+            },
+            {
+                id: 41,
+                question: "What are Azure DevOps analytics views?",
+                answer: "Analytics views are customized datasets for reporting that: 1) Filter work item data, 2) Define fields to include, 3) Set historical data range, 4) Enable Power BI integration, 5) Support advanced queries and aggregations for better insights."
+            },
+            {
+                id: 42,
+                question: "How do you implement mobile app CI/CD with Azure DevOps?",
+                answer: "Mobile app CI/CD involves: 1) Building iOS/Android apps, 2) App Center integration, 3) App store deployment, 4) Beta testing distribution, 5) Code signing management. Azure DevOps tasks support all major mobile platforms and distribution channels."
+            },
+            {
+                id: 43,
+                question: "What are Azure DevOps query charts?",
+                answer: "Query charts visualize work item query results as: 1) Pie charts, 2) Bar charts, 3) Stacked bar charts, 4) Trend charts, 5) Pivot tables. Charts can be pinned to dashboards for real-time visibility into team progress."
+            },
+            {
+                id: 44,
+                question: "Explain Azure DevOps integration with ServiceNow.",
+                answer: "Azure DevOps integrates with ServiceNow through: 1) ServiceNow change management gates, 2) Work item synchronization, 3) REST API integration, 4) Custom webhooks, 5) Marketplace extensions. This enables ITIL compliance and enterprise process integration."
+            },
+            {
+                id: 45,
+                question: "What are Azure DevOps delivery plans?",
+                answer: "Delivery plans provide cross-team timeline views showing: 1) Multiple team backlogs on single timeline, 2) Feature and epic tracking, 3) Dependency visualization, 4) Timeline adjustments, 5) Progress tracking across teams and sprints."
+            },
+            {
+                id: 46,
+                question: "How do you implement infrastructure compliance scanning?",
+                answer: "Infrastructure compliance scanning uses: 1) Azure Policy, 2) Custom compliance scripts, 3) Third-party tools (Checkov, Terrascan), 4) Security Center integration, 5) Compliance as code. Scan results can fail deployments if compliance requirements aren't met."
+            },
+            {
+                id: 47,
+                question: "What are Azure DevOps team capacity planning features?",
+                answer: "Capacity planning features include: 1) Team member capacity settings, 2) Activity type allocation, 3) Sprint capacity tracking, 4) Velocity charts, 5) Burndown charts. These help teams plan work realistically based on available capacity."
+            },
+            {
+                id: 48,
+                question: "Explain Azure DevOps integration with Jira.",
+                answer: "Azure DevOps integrates with Jira through: 1) Marketplace extensions, 2) Work item synchronization, 3) Build and release status updates, 4) Bidirectional linking, 5) Custom integration via REST APIs. This enables using Azure DevOps CI/CD with Jira project management."
+            },
+            {
+                id: 49,
+                question: "What are Azure DevOps pull request statuses?",
+                answer: "Pull request statuses indicate the state of validations including: 1) Build status, 2) Policy evaluations, 3) Manual approvals, 4) External service checks, 5) Code coverage results. Statuses must be successful for pull request completion."
+            },
+            {
+                id: 50,
+                question: "How do you implement multi-region deployment with Azure DevOps?",
+                answer: "Multi-region deployment involves: 1) Multiple deployment stages per region, 2) Geographic routing configuration, 3) Regional health checks, 4) Traffic manager/AFD integration, 5) Regional rollback capabilities. Azure DevOps supports parallel deployment to multiple regions."
+            },
+            // Questions 51-100
+            {
+                id: 51,
+                question: "What is Azure DevOps scale units and how do they work?",
+                answer: "Azure DevOps scale units are isolated deployment units that provide: 1) Geographic distribution, 2) Load balancing, 3) Disaster recovery, 4) Performance isolation. Organizations are automatically assigned to scale units based on geography and capacity."
+            },
+            {
+                id: 52,
+                question: "How do you implement automated testing in Azure Pipelines?",
+                answer: "Automated testing implementation: 1) Unit tests with test runners, 2) Integration tests with test environments, 3) UI testing with Selenium/Playwright, 4) API testing with Postman/newman, 5) Test results publishing and trend analysis."
+            },
+            {
+                id: 53,
+                question: "What are Azure DevOps work item queries?",
+                answer: "Work item queries are saved searches that filter and display work items based on criteria. Types include: 1) Flat list queries, 2) Tree queries (hierarchical), 3) Direct links queries. Queries can be shared, pinned to dashboards, and used in charts."
+            },
+            {
+                id: 54,
+                question: "Explain Azure DevOps integration with Kubernetes.",
+                answer: "Azure DevOps integrates with Kubernetes through: 1) Kubernetes manifest deployment tasks, 2) Helm chart deployment, 3) Kubectl commands, 4) AKS cluster connections, 5) Container registry integration. This enables full Kubernetes application CI/CD."
+            },
+            {
+                id: 55,
+                question: "What are Azure DevOps process templates?",
+                answer: "Process templates define work item types, states, and workflows. Default templates include: 1) Agile, 2) Scrum, 3) CMMI. Organizations can create custom processes with inherited processes in Azure DevOps Services."
+            },
+            {
+                id: 56,
+                question: "How do you implement rollback strategies in Azure DevOps?",
+                answer: "Rollback strategies include: 1) Blue-green deployment switching, 2) Feature flags toggle, 3) Database migration rollback scripts, 4) Infrastructure redeployment, 5) Last known good deployment promotion. Azure DevOps supports automated rollback gates."
+            },
+            {
+                id: 57,
+                question: "What are Azure DevOps notification settings?",
+                answer: "Notification settings control alerts for: 1) Work item changes, 2) Build completion, 3) Release status, 4) Pull request updates, 5) Code comments. Notifications can be delivered via email, Slack, Teams, or custom webhooks."
+            },
+            {
+                id: 58,
+                question: "Explain Azure DevOps integration with Azure Active Directory.",
+                answer: "Azure AD integration provides: 1) Single sign-on, 2) Group-based permissions, 3) Conditional access policies, 4) Multi-factor authentication, 5) User provisioning/deprovisioning. Azure DevOps uses Azure AD for identity management."
+            },
+            {
+                id: 59,
+                question: "What are Azure DevOps repository permissions?",
+                answer: "Repository permissions control: 1) Read/write access to code, 2) Branch creation/deletion, 3) Pull request management, 4) Policy configuration, 5) Tag management. Permissions can be set at project, repository, and branch levels."
+            },
+            {
+                id: 60,
+                question: "How do you implement dependency scanning in Azure Pipelines?",
+                answer: "Dependency scanning uses tools like: 1) WhiteSource Bolt, 2) Snyk, 3) OWASP Dependency Check, 4) GitHub Security Advisory, 5) Azure Security Center. These scan for vulnerable dependencies and can fail builds if critical issues found."
+            },
+            {
+                id: 61,
+                question: "What are Azure DevOps team rooms?",
+                answer: "Team rooms provide collaborative spaces for: 1) Team discussions, 2) Build notifications, 3) Release alerts, 4) Work item updates, 5) Custom notifications. Team rooms help teams stay informed about project activities."
+            },
+            {
+                id: 62,
+                question: "Explain Azure DevOps integration with Azure Functions.",
+                answer: "Azure Functions integrate with Azure DevOps for: 1) Custom release gates, 2) Webhook processing, 3) Automated tasks, 4) Notification processing, 5) Custom API endpoints. Functions can extend Azure DevOps capabilities."
+            },
+            {
+                id: 63,
+                question: "What are Azure DevOps build retention policies?",
+                answer: "Build retention policies control how long builds are stored. Settings include: 1) Maximum age for builds, 2) Minimum to retain per branch, 3) Pull request build retention, 4) Automated cleanup schedules, 5) Manual build pinning to prevent deletion."
+            },
+            {
+                id: 64,
+                question: "How do you implement configuration management in Azure DevOps?",
+                answer: "Configuration management uses: 1) Variable groups for environment configs, 2) ARM templates for infrastructure, 3) App settings transformation, 4) Feature flags for runtime config, 5) Secure files for certificates and config files."
+            },
+            {
+                id: 65,
+                question: "What are Azure DevOps area paths and iteration paths?",
+                answer: "Area paths organize work items by product areas or teams. Iteration paths represent sprints or time periods. They enable: 1) Team-specific backlogs, 2) Sprint planning, 3) Progress tracking, 4) Reporting by area/iteration, 5) Permission scoping."
+            },
+            {
+                id: 66,
+                question: "Explain Azure DevOps integration with Azure Monitor Application Insights.",
+                answer: "Application Insights integration provides: 1) Release gate health checks, 2) Performance monitoring, 3) Error tracking, 4) Usage analytics, 5) Smart detection alerts. This enables data-driven deployment decisions."
+            },
+            {
+                id: 67,
+                question: "What are Azure DevOps repository tags?",
+                answer: "Repository tags are labels applied to commits for: 1) Release versioning, 2) Important milestones, 3) Hotfix identification, 4) Code freeze markers, 5) Deployment tracking. Tags can be created manually or through pipelines."
+            },
+            {
+                id: 68,
+                question: "How do you implement chaos engineering in Azure DevOps?",
+                answer: "Chaos engineering implementation: 1) Chaos Mesh/Chaos Monkey integration, 2) Controlled failure injection, 3) Resilience testing pipelines, 4) Automated recovery validation, 5) Performance under failure monitoring. This improves system reliability."
+            },
+            {
+                id: 69,
+                question: "What are Azure DevOps work item templates?",
+                answer: "Work item templates pre-populate fields for common work item types. They save time for: 1) Bug reports, 2) User stories, 3) Tasks, 4) Test cases, 5) Epics. Templates ensure consistency in work item creation."
+            },
+            {
+                id: 70,
+                question: "Explain Azure DevOps integration with Azure Container Registry.",
+                answer: "ACR integration enables: 1) Docker image builds, 2) Image vulnerability scanning, 3) Automated image pushes, 4) Image versioning, 5) Pull-based deployments. ACR serves as private container registry for organizations."
+            },
+            {
+                id: 71,
+                question: "What are Azure DevOps branch policies?",
+                answer: "Branch policies enforce code quality on target branches (like main). Policies include: 1) Required reviewers, 2) Build validation, 3) Work item linking, 4) Comment resolution, 5) Status checks, 6) Merge strategy requirements."
+            },
+            {
+                id: 72,
+                question: "How do you implement database migration in Azure DevOps?",
+                answer: "Database migration approaches: 1) SSDT database projects, 2) Entity Framework migrations, 3) Flyway/Liquibase scripts, 4) Custom SQL migration scripts, 5) Database comparison tools. Always test migrations and have rollback plans."
+            },
+            {
+                id: 73,
+                question: "What are Azure DevOps release triggers?",
+                answer: "Release triggers automatically start releases when: 1) Build completes, 2) Scheduled time reached, 3) Manual approval given, 4) Another release completes, 5) External event occurs via webhook. Triggers enable automated deployment workflows."
+            },
+            {
+                id: 74,
+                question: "Explain Azure DevOps integration with Azure Key Vault.",
+                answer: "Azure Key Vault integration provides: 1) Secure secret storage, 2) Automatic secret rotation, 3) Access policy management, 4) Certificate management, 5) Integration with variable groups. Secrets are retrieved during pipeline execution."
+            },
+            {
+                id: 75,
+                question: "What are Azure DevOps pipeline variables?",
+                answer: "Pipeline variables store values used in pipeline execution. They can be: 1) Defined in YAML or UI, 2) Marked as secret, 3) Scoped to stages/jobs, 4) Settable at queue time, 5) Referenced in expressions. Variables enable configuration without code changes."
+            },
+            {
+                id: 76,
+                question: "How do you implement accessibility testing in Azure Pipelines?",
+                answer: "Accessibility testing uses tools like: 1) axe-core, 2) Pa11y, 3) Lighthouse CI, 4) Accessibility Insights, 5) Custom scripts. These check for WCAG compliance and can fail builds if accessibility standards not met."
+            },
+            {
+                id: 77,
+                question: "What are Azure DevOps work item state transitions?",
+                answer: "State transitions define workflow for work items. They control: 1) Valid state changes, 2) Required fields per state, 3) Rules and conditions, 4) Custom states, 5) Transition reasons. Workflows ensure consistent work item progression."
+            },
+            {
+                id: 78,
+                question: "Explain Azure DevOps integration with Azure Storage.",
+                answer: "Azure Storage integration enables: 1) Build artifact storage, 2) Test result storage, 3) Log file archiving, 4) Deployment package storage, 5) Custom file storage. Storage accounts provide scalable, secure file storage."
+            },
+            {
+                id: 79,
+                question: "What are Azure DevOps pipeline environments?",
+                answer: "Environments represent deployment targets like: 1) Development, 2) Staging, 3) Production, 4) QA, 5) Canary. Environments provide: deployment history, approvals, checks, and resource tracking."
+            },
+            {
+                id: 80,
+                question: "How do you implement compliance tracking in Azure DevOps?",
+                answer: "Compliance tracking uses: 1) Work item tagging, 2) Custom fields for compliance data, 3) Query-based reporting, 4) Power BI dashboards, 5) Audit log reviews. This helps meet regulatory requirements."
+            },
+            {
+                id: 81,
+                question: "What are Azure DevOps repository webhooks?",
+                answer: "Repository webhooks send events to external services for: 1) Code push notifications, 2) Pull request updates, 3) Branch creation/deletion, 4) Tag creation, 5) Comment events. Webhooks enable real-time integrations."
+            },
+            {
+                id: 82,
+                question: "Explain Azure DevOps integration with Azure Service Bus.",
+                answer: "Service Bus integration enables: 1) Asynchronous messaging, 2) Event-driven pipelines, 3) Workflow coordination, 4) Notification distribution, 5) Custom event processing. Service Bus decouples pipeline components."
+            },
+            {
+                id: 83,
+                question: "What are Azure DevOps pipeline conditions?",
+                answer: "Pipeline conditions control when jobs/steps run based on: 1) Branch filters, 2) Variable expressions, 3) Previous job status, 4) Custom conditions, 5) Schedule triggers. Conditions enable conditional execution logic."
+            },
+            {
+                id: 84,
+                question: "How do you implement performance monitoring in Azure DevOps?",
+                answer: "Performance monitoring uses: 1) Application Insights integration, 2) Custom performance tests, 3) Load testing results, 4) Pipeline duration tracking, 5) Resource utilization monitoring. This ensures application performance standards."
+            },
+            {
+                id: 85,
+                question: "What are Azure DevOps repository statistics?",
+                answer: "Repository statistics show: 1) Commit history, 2) Code churn, 3) Top contributors, 4) File change frequency, 5) Branch comparison. Statistics help understand codebase evolution and team contributions."
+            },
+            {
+                id: 86,
+                question: "Explain Azure DevOps integration with Azure Event Grid.",
+                answer: "Event Grid integration enables: 1) Real-time event processing, 2) Custom workflow triggers, 3) Multi-service coordination, 4) Audit event distribution, 5) Pipeline event publishing. Event Grid provides reliable event delivery."
+            },
+            {
+                id: 87,
+                question: "What are Azure DevOps pipeline caching?",
+                answer: "Pipeline caching stores dependencies between runs to: 1) Reduce build times, 2) Cache npm/NuGet packages, 3) Cache Docker layers, 4) Cache custom dependencies, 5) Improve pipeline performance. Caching uses Azure storage."
+            },
+            {
+                id: 88,
+                question: "How do you implement disaster recovery with Azure DevOps?",
+                answer: "Disaster recovery strategies: 1) Cross-region replication, 2) Regular project exports, 3) Pipeline definition backups, 4) Agent pool redundancy, 5) Recovery playbooks. Azure DevOps Services has built-in high availability."
+            },
+            {
+                id: 89,
+                question: "What are Azure DevOps repository comparisons?",
+                answer: "Repository comparisons show differences between: 1) Branches, 2) Commits, 3) Tags, 4) Pull requests, 5) File versions. Comparisons help with code review and change analysis."
+            },
+            {
+                id: 90,
+                question: "Explain Azure DevOps integration with Azure Logic Apps.",
+                answer: "Logic Apps integration enables: 1) Custom workflow automation, 2) External system integration, 3) Notification workflows, 4) Data synchronization, 5) Approval process automation. Logic Apps provide visual workflow design."
+            },
+            {
+                id: 91,
+                question: "What are Azure DevOps pipeline artifacts sources?",
+                answer: "Artifact sources provide inputs to release pipelines from: 1) Build pipelines, 2) Azure Container Registry, 3) GitHub releases, 4) Jenkins builds, 5) Universal packages. Multiple sources can feed single release."
+            },
+            {
+                id: 92,
+                question: "How do you implement cost optimization in Azure DevOps?",
+                answer: "Cost optimization strategies: 1) Use Microsoft-hosted agents when possible, 2) Right-size self-hosted agents, 3) Implement pipeline caching, 4) Clean up old builds/releases, 5) Use parallel jobs efficiently, 6) Monitor usage metrics."
+            },
+            {
+                id: 93,
+                question: "What are Azure DevOps repository file history?",
+                answer: "File history shows: 1) All changes to a file, 2) Who made changes, 3) When changes were made, 4) Associated work items, 5) Code review comments. History helps with debugging and accountability."
+            },
+            {
+                id: 94,
+                question: "Explain Azure DevOps integration with Azure API Management.",
+                answer: "API Management integration enables: 1) API deployment automation, 2) API version management, 3) Policy deployment, 4) API testing, 5) Documentation generation. This automates API lifecycle management."
+            },
+            {
+                id: 95,
+                question: "What are Azure DevOps pipeline expressions?",
+                answer: "Pipeline expressions enable dynamic values using: 1) Variable references, 2) Conditional logic, 3) Function calls, 4) Template parameters, 5) Environment variables. Expressions make pipelines more flexible and reusable."
+            },
+            {
+                id: 96,
+                question: "How do you implement zero-downtime deployment with Azure DevOps?",
+                answer: "Zero-downtime deployment strategies: 1) Blue-green deployment, 2) Canary releases, 3) Rolling updates, 4) Feature flags, 5) Database migration techniques. Azure DevOps supports all these patterns with proper configuration."
+            },
+            {
+                id: 97,
+                question: "What are Azure DevOps repository permissions inheritance?",
+                answer: "Permissions inheritance means child objects inherit parent permissions. Structure: 1) Organization > Project > Repository > Branch. Inheritance can be broken for custom permissions. This simplifies permission management."
+            },
+            {
+                id: 98,
+                question: "Explain Azure DevOps integration with Azure Cosmos DB.",
+                answer: "Cosmos DB integration enables: 1) Database deployment automation, 2) Data migration scripts, 3) Performance testing, 4) Backup/restore automation, 5) Custom data processing. Cosmos DB provides globally distributed database."
+            },
+            {
+                id: 99,
+                question: "What are Azure DevOps pipeline timing data?",
+                answer: "Pipeline timing data shows: 1) Job duration, 2) Step execution time, 3) Queue time, 4) Agent setup time, 5) Download/upload times. Timing data helps optimize pipeline performance and identify bottlenecks."
+            },
+            {
+                id: 100,
+                question: "How do you implement multi-cloud deployment with Azure DevOps?",
+                answer: "Multi-cloud deployment uses: 1) Cloud-specific service connections, 2) Environment-specific configurations, 3) Cloud-agnostic tools (Terraform), 4) Cross-cloud networking, 5) Unified monitoring. Azure DevOps can deploy to AWS, GCP, and Azure."
+            },
+            // Questions 101-150
+            {
+                id: 101,
+                question: "What are Azure DevOps repository branch security?",
+                answer: "Branch security controls: 1) User/group permissions per branch, 2) Force push restrictions, 3) Branch deletion protection, 4) Policy enforcement, 5) Status check requirements. Branch security prevents unauthorized changes."
+            },
+            {
+                id: 102,
+                question: "Explain Azure DevOps integration with Azure Cognitive Services.",
+                answer: "Cognitive Services integration enables: 1) Code analysis, 2) Sentiment analysis of comments, 3) Image processing, 4) Natural language processing, 5) Custom AI workflows. This adds intelligence to DevOps processes."
+            },
+            {
+                id: 103,
+                question: "What are Azure DevOps pipeline matrix strategies?",
+                answer: "Matrix strategies run jobs with different configurations: 1) Multiple operating systems, 2) Different versions, 3) Various test configurations, 4) Cross-platform testing, 5) Parameter combinations. Matrix enables comprehensive testing."
+            },
+            {
+                id: 104,
+                question: "How do you implement compliance as code with Azure DevOps?",
+                answer: "Compliance as code uses: 1) Policy-as-code tools, 2) Infrastructure compliance scanning, 3) Security scanning integration, 4) Automated compliance reporting, 5) Regulatory requirement tracking. This ensures continuous compliance."
+            },
+            {
+                id: 105,
+                question: "What are Azure DevOps repository code owners?",
+                answer: "Code owners are specified in CODEOWNERS file to: 1) Automatically request reviews, 2) Define responsibility areas, 3) Enforce expertise requirements, 4) Streamline code review process, 5) Maintain code quality standards."
+            },
+            {
+                id: 106,
+                question: "Explain Azure DevOps integration with Azure Data Factory.",
+                answer: "Data Factory integration enables: 1) Data pipeline deployment, 2) ETL process automation, 3) Data validation testing, 4) Data quality checks, 5) Data orchestration automation. This automates data engineering workflows."
+            },
+            {
+                id: 107,
+                question: "What are Azure DevOps pipeline deployment strategies?",
+                answer: "Deployment strategies include: 1) Rolling deployment, 2) Blue-green deployment, 3) Canary release, 4) A/B testing, 5) Feature toggle deployment. Strategies control how new versions are rolled out to users."
+            },
+            {
+                id: 108,
+                question: "How do you implement chaos engineering in pipelines?",
+                answer: "Chaos engineering in pipelines: 1) Failure injection tests, 2) Resilience validation, 3) Recovery time measurement, 4) Dependency failure simulation, 5) Performance under stress testing. This improves system reliability."
+            },
+            {
+                id: 109,
+                question: "What are Azure DevOps repository submodules?",
+                answer: "Git submodules allow including other repositories: 1) Shared code libraries, 2) Common components, 3) Vendor code, 4) Template repositories, 5) Documentation sources. Submodules enable code reuse across projects."
+            },
+            {
+                id: 110,
+                question: "Explain Azure DevOps integration with Azure Stream Analytics.",
+                answer: "Stream Analytics integration enables: 1) Real-time data processing pipelines, 2) Streaming data validation, 3) Performance monitoring, 4) Alert automation, 5) Data transformation workflows. This processes high-volume data streams."
+            },
+            {
+                id: 111,
+                question: "What are Azure DevOps pipeline manual interventions?",
+                answer: "Manual interventions pause pipelines for: 1) Manual approvals, 2) External validations, 3) User input collection, 4) Emergency stops, 5) Custom verification steps. Interventions add human control to automated processes."
+            },
+            {
+                id: 112,
+                question: "How do you implement green software development with Azure DevOps?",
+                answer: "Green software practices: 1) Energy-efficient coding, 2) Resource optimization, 3) Carbon-aware scheduling, 4) Sustainable infrastructure, 5) Environmental impact tracking. Azure DevOps can integrate with sustainability tools."
+            },
+            {
+                id: 113,
+                question: "What are Azure DevOps repository hooks?",
+                answer: "Repository hooks (server-side) enforce: 1) Commit message standards, 2) Code quality checks, 3) Security scanning, 4) Branch naming conventions, 5) Custom validations. Hooks run on repository server before accepting changes."
+            },
+            {
+                id: 114,
+                question: "Explain Azure DevOps integration with Azure Machine Learning.",
+                answer: "Machine Learning integration enables: 1) ML model training pipelines, 2) Model deployment automation, 3) Experiment tracking, 4) Data versioning, 5) MLOps practices. This automates machine learning lifecycle."
+            },
+            {
+                id: 115,
+                question: "What are Azure DevOps pipeline resource triggers?",
+                answer: "Resource triggers start pipelines when: 1) Container registry gets new image, 2) Package feed gets new package, 3) Another pipeline completes, 4) Repository gets new tag, 5) External resource changes. Triggers enable event-driven pipelines."
+            },
+            {
+                id: 116,
+                question: "How do you implement shift-left security with Azure DevOps?",
+                answer: "Shift-left security moves security early in lifecycle: 1) Pre-commit hooks, 2) Pull request security scans, 3) IDE integration, 4) Developer security training, 5) Security as code. This finds and fixes security issues early."
+            },
+            {
+                id: 117,
+                question: "What are Azure DevOps repository cherry-picking?",
+                answer: "Cherry-picking applies specific commits to different branches: 1) Hotfix deployment, 2) Feature backporting, 3) Bug fix propagation, 4) Selective commit application, 5) Cross-branch fix sharing. Cherry-picking moves specific changes between branches."
+            },
+            {
+                id: 118,
+                question: "Explain Azure DevOps integration with Azure Synapse Analytics.",
+                answer: "Synapse Analytics integration enables: 1) Data warehouse deployment, 2) ETL pipeline automation, 3) Data transformation workflows, 4) Analytics job scheduling, 5) Big data processing automation. This automates data analytics workflows."
+            },
+            {
+                id: 119,
+                question: "What are Azure DevOps pipeline approvals?",
+                answer: "Approvals require manual permission for: 1) Production deployments, 2) Security-sensitive changes, 3) Compliance requirements, 4) Business verification, 5) External stakeholder approval. Approvals add governance to deployments."
+            },
+            {
+                id: 120,
+                question: "How do you implement AI/ML operations with Azure DevOps?",
+                answer: "MLOps implementation: 1) Model versioning, 2) Automated retraining, 3) Model deployment pipelines, 4) Data drift monitoring, 5) Experiment tracking. Azure DevOps provides complete MLOps capabilities."
+            },
+            {
+                id: 121,
+                question: "What are Azure DevOps repository rebasing?",
+                answer: "Rebasing rewrites commit history to: 1) Maintain linear history, 2) Incorporate upstream changes, 3) Resolve conflicts, 4) Clean up commit history, 5) Prepare for merge. Rebasing creates cleaner project history."
+            },
+            {
+                id: 122,
+                question: "Explain Azure DevOps integration with Azure Digital Twins.",
+                answer: "Digital Twins integration enables: 1) IoT deployment automation, 2) Digital twin updates, 3) Telemetry processing, 4) Model synchronization, 5) Simulation testing. This automates digital twin management."
+            },
+            {
+                id: 123,
+                question: "What are Azure DevOps pipeline schedules?",
+                answer: "Schedules trigger pipelines at specific times: 1) Nightly builds, 2) Weekly deployments, 3) Maintenance windows, 4) Business hours, 5) Custom cron schedules. Scheduled pipelines enable regular automated tasks."
+            },
+            {
+                id: 124,
+                question: "How do you implement blockchain DevOps with Azure DevOps?",
+                answer: "Blockchain DevOps: 1) Smart contract deployment, 2) Blockchain network provisioning, 3) Contract testing automation, 4) Network configuration management, 5) Blockchain node management. This applies DevOps to blockchain development."
+            },
+            {
+                id: 125,
+                question: "What are Azure DevOps repository bisecting?",
+                answer: "Bisecting finds the commit that introduced a bug: 1) Automated binary search, 2) Test automation integration, 3) Bug reproduction, 4) Commit range testing, 5) Culprit identification. Bisecting efficiently finds problematic commits."
+            },
+            {
+                id: 126,
+                question: "Explain Azure DevOps integration with Azure IoT Hub.",
+                answer: "IoT Hub integration enables: 1) Device deployment automation, 2) Firmware update distribution, 3) Device configuration management, 4) Telemetry pipeline setup, 5) IoT solution lifecycle management. This automates IoT operations."
+            },
+            {
+                id: 127,
+                question: "What are Azure DevOps pipeline artifacts filtering?",
+                answer: "Artifact filtering selects specific files: 1) Include/exclude patterns, 2) File type filters, 3) Path-based selection, 4) Custom conditions, 5) Environment-specific artifacts. Filtering controls what gets published/consumed."
+            },
+            {
+                id: 128,
+                question: "How do you implement quantum computing DevOps?",
+                answer: "Quantum DevOps: 1) Quantum algorithm testing, 2) Quantum circuit deployment, 3) Quantum job scheduling, 4) Result processing automation, 5) Quantum resource management. This applies DevOps to quantum computing."
+            },
+            {
+                id: 129,
+                question: "What are Azure DevOps repository patching?",
+                answer: "Patching applies fixes without full context: 1) Emergency security fixes, 2) Minimal change deployment, 3) Quick fix propagation, 4) Patch validation, 5) Temporary solution deployment. Patching addresses urgent issues quickly."
+            },
+            {
+                id: 130,
+                question: "Explain Azure DevOps integration with Azure Sphere.",
+                answer: "Azure Sphere integration enables: 1) IoT device security updates, 2) Device certification automation, 3) Security monitoring, 4) Firmware deployment, 5) Device lifecycle management. This secures and manages IoT devices."
+            },
+            {
+                id: 131,
+                question: "What are Azure DevOps pipeline gates?",
+                answer: "Gates automatically validate conditions: 1) Health checks, 2) Security scans, 3) Performance tests, 4) Compliance checks, 5) Custom validations. Gates ensure deployment readiness automatically."
+            },
+            {
+                id: 132,
+                question: "How do you implement edge computing DevOps?",
+                answer: "Edge DevOps: 1) Edge device deployment, 2) Local processing configuration, 3) Bandwidth optimization, 4) Offline capability testing, 5) Edge-to-cloud synchronization. This manages distributed edge systems."
+            },
+            {
+                id: 133,
+                question: "What are Azure DevOps repository stashing?",
+                answer: "Stashing temporarily saves changes: 1) Context switching, 2) Emergency fixes, 3) Clean working directory, 4) Temporary work preservation, 5) Quick branch switching. Stashing helps manage work-in-progress."
+            },
+            {
+                id: 134,
+                question: "Explain Azure DevOps integration with Azure Arc.",
+                answer: "Azure Arc integration enables: 1) Multi-cloud resource management, 2) Hybrid deployment automation, 3) Consistent policy enforcement, 4) Cross-environment monitoring, 5) Unified configuration management. This extends Azure management to any infrastructure."
+            },
+            {
+                id: 135,
+                question: "What are Azure DevOps pipeline templates parameters?",
+                answer: "Template parameters make templates reusable: 1) Input validation, 2) Default values, 3) Required/optional parameters, 4) Type checking, 5) Parameter documentation. Parameters customize template behavior."
+            },
+            {
+                id: 136,
+                question: "How do you implement serverless DevOps?",
+                answer: "Serverless DevOps: 1) Function deployment automation, 2) Cold start optimization, 3) Resource scaling configuration, 4) Event source management, 5) Performance monitoring. This manages serverless applications."
+            },
+            {
+                id: 137,
+                question: "What are Azure DevOps repository worktree?",
+                answer: "Worktrees enable multiple working directories: 1) Parallel feature development, 2) Multiple branch work, 3) Experimental changes, 4) Quick context switching, 5) Independent development environments. Worktrees improve developer productivity."
+            },
+            {
+                id: 138,
+                question: "Explain Azure DevOps integration with Azure Purview.",
+                answer: "Purview integration enables: 1) Data lineage tracking, 2) Compliance reporting, 3) Data classification, 4) Privacy management, 5) Governance automation. This manages data governance in DevOps."
+            },
+            {
+                id: 139,
+                question: "What are Azure DevOps pipeline container jobs?",
+                answer: "Container jobs run steps in containers: 1) Consistent environments, 2) Dependency isolation, 3) Custom tool installations, 4) Environment reproducibility, 5) Resource isolation. Container jobs ensure consistent execution environments."
+            },
+            {
+                id: 140,
+                question: "How do you implement multi-tenant DevOps?",
+                answer: "Multi-tenant DevOps: 1) Tenant isolation, 2) Shared resource management, 3) Tenant-specific configurations, 4) Scalability planning, 5) Performance isolation. This serves multiple customers from shared infrastructure."
+            },
+            {
+                id: 141,
+                question: "What are Azure DevOps repository attributes?",
+                answer: "Git attributes configure repository behavior: 1) Line ending handling, 2) Merge strategies, 3) Diff algorithms, 4) Custom filters, 5) Export control. Attributes customize Git operations for specific needs."
+            },
+            {
+                id: 142,
+                question: "Explain Azure DevOps integration with Azure Confidential Computing.",
+                answer: "Confidential Computing integration: 1) Secure enclave deployment, 2) Encrypted data processing, 3) Hardware-based security, 4) Privacy-preserving computation, 5) Trusted execution environments. This enables secure data processing."
+            },
+            {
+                id: 143,
+                question: "What are Azure DevOps pipeline deployment rings?",
+                answer: "Deployment rings gradually roll out changes: 1) Internal testing, 2) Early adopters, 3) Broad deployment, 4) Full deployment, 5) Rollback strategies. Rings minimize risk and gather feedback during deployment."
+            },
+            {
+                id: 144,
+                question: "How do you implement GitOps with Azure DevOps?",
+                answer: "GitOps implementation: 1) Git as single source of truth, 2) Automated synchronization, 3) Pull-based deployment, 4) Declarative configuration, 5) Continuous reconciliation. GitOps uses Git workflows for operations."
+            },
+            {
+                id: 145,
+                question: "What are Azure DevOps repository notes?",
+                answer: "Git notes add metadata to commits: 1) Code review comments, 2) Deployment information, 3) Testing results, 4) Security scan results, 5) Custom annotations. Notes add information without changing commit history."
+            },
+            {
+                id: 146,
+                question: "Explain Azure DevOps integration with Azure NetApp Files.",
+                answer: "NetApp Files integration: 1) High-performance storage, 2) Data volume management, 3) Snapshot automation, 4) Backup/restore workflows, 5) Storage optimization. This manages enterprise-grade file storage."
+            },
+            {
+                id: 147,
+                question: "What are Azure DevOps pipeline runtime parameters?",
+                answer: "Runtime parameters set values at queue time: 1) Deployment targets, 2) Configuration options, 3) Feature flags, 4) Environment selections, 5) Custom inputs. Parameters make pipelines flexible for different scenarios."
+            },
+            {
+                id: 148,
+                question: "How do you implement platform engineering with Azure DevOps?",
+                answer: "Platform engineering: 1) Internal developer platforms, 2) Self-service capabilities, 3) Standardized toolchains, 4) Golden paths, 5) Developer experience optimization. This provides curated platforms for development teams."
+            },
+            {
+                id: 149,
+                question: "What are Azure DevOps repository bundles?",
+                answer: "Git bundles package repositories for offline use: 1) Air-gapped environments, 2) Bandwidth-constrained scenarios, 3) Backup creation, 4) Repository transfer, 5) Offline development. Bundles enable Git operations without network."
+            },
+            {
+                id: 150,
+                question: "Explain Azure DevOps integration with Azure VMware Solution.",
+                answer: "VMware Solution integration: 1) Virtual machine deployment, 2) vCenter management, 3) Network configuration, 4) Storage management, 5) Hybrid cloud operations. This extends DevOps to VMware environments."
+            },
+            // Questions 151-200
+            {
+                id: 151,
+                question: "What are Azure DevOps pipeline decorators?",
+                answer: "Pipeline decorators automatically inject steps: 1) Security scanning, 2) Notifications, 3) Logging, 4) Compliance checks, 5) Custom validations. Decorators extend pipelines without modifying source code."
+            },
+            {
+                id: 152,
+                question: "How do you implement FinOps with Azure DevOps?",
+                answer: "FinOps implementation: 1) Cost visibility, 2) Budget management, 3) Resource optimization, 4) Cost allocation, 5) Financial governance. FinOps brings financial accountability to DevOps practices."
+            },
+            {
+                id: 153,
+                question: "What are Azure DevOps repository grafts?",
+                answer: "Git grafts connect unrelated histories: 1) Repository merging, 2) History unification, 3) Legacy system integration, 4) Project combination, 5) Historical data preservation. Grafts merge separate development histories."
+            },
+            {
+                id: 154,
+                question: "Explain Azure DevOps integration with Azure Spring Apps.",
+                answer: "Spring Apps integration: 1) Java application deployment, 2) Spring Boot automation, 3) Microservices management, 4) Configuration management, 5) Service discovery. This manages Spring applications on Azure."
+            },
+            {
+                id: 155,
+                question: "What are Azure DevOps pipeline task groups?",
+                answer: "Task groups package multiple tasks: 1) Reusable task sequences, 2) Standardized processes, 3) Simplified pipeline authoring, 4) Centralized updates, 5) Best practice enforcement. Task groups promote consistency across pipelines."
+            },
+            {
+                id: 156,
+                question: "How do you implement data DevOps?",
+                answer: "Data DevOps: 1) Data pipeline automation, 2) Data quality testing, 3) Database versioning, 4) Data governance, 5) Analytics deployment. This applies DevOps practices to data engineering and analytics."
+            },
+            {
+                id: 157,
+                question: "What are Azure DevOps repository replace objects?",
+                answer: "Git replace objects reference other objects: 1) History modification, 2) Commit replacement, 3) Experimental changes, 4) Temporary fixes, 5) Alternative implementations. Replace objects enable flexible history management."
+            },
+            {
+                id: 158,
+                question: "Explain Azure DevOps integration with Azure Kubernetes Fleet Manager.",
+                answer: "Fleet Manager integration: 1) Multi-cluster management, 2) Centralized configuration, 3) Fleet-wide deployments, 4) Cross-cluster monitoring, 5) Unified governance. This manages Kubernetes fleets at scale."
+            },
+            {
+                id: 159,
+                question: "What are Azure DevOps pipeline variable groups?",
+                answer: "Variable groups store related variables: 1) Environment configurations, 2) Connection strings, 3) Feature flags, 4) Security settings, 5) Application settings. Groups enable centralized configuration management."
+            },
+            {
+                id: 160,
+                question: "How do you implement AI ethics in DevOps?",
+                answer: "AI ethics implementation: 1) Bias detection, 2) Fairness testing, 3) Transparency requirements, 4) Accountability tracking, 5) Ethical review processes. This ensures responsible AI development and deployment."
+            },
+            {
+                id: 161,
+                question: "What are Azure DevOps repository mailmap?",
+                answer: "Git mailmap corrects author information: 1) Name/email normalization, 2) Contributor consolidation, 3) Historical data cleanup, 4) Corporate identity management, 5) Attribution accuracy. Mailmap ensures accurate contributor tracking."
+            },
+            {
+                id: 162,
+                question: "Explain Azure DevOps integration with Azure Container Apps.",
+                answer: "Container Apps integration: 1) Containerized application deployment, 2) Auto-scaling configuration, 3) Service discovery, 4) Dapr integration, 5) Event-driven scaling. This manages serverless container applications."
+            },
+            {
+                id: 163,
+                question: "What are Azure DevOps pipeline demands?",
+                answer: "Pipeline demands specify agent requirements: 1) Specific capabilities, 2) Software versions, 3) Hardware requirements, 4) Environment variables, 5) Custom conditions. Demands ensure jobs run on suitable agents."
+            },
+            {
+                id: 164,
+                question: "How do you implement quantum-safe cryptography in DevOps?",
+                answer: "Quantum-safe cryptography: 1) Post-quantum algorithm implementation, 2) Cryptographic agility, 3) Key management, 4) Migration planning, 5) Future-proof security. This prepares for quantum computing threats."
+            },
+            {
+                id: 165,
+                question: "What are Azure DevOps repository shallow clones?",
+                answer: "Shallow clones limit history depth: 1) Faster cloning, 2) Reduced storage, 3) CI/CD optimization, 4) Large repository handling, 5) Limited history scenarios. Shallow clones improve performance for specific use cases."
+            },
+            {
+                id: 166,
+                question: "Explain Azure DevOps integration with Azure Managed Grafana.",
+                answer: "Managed Grafana integration: 1) Dashboard deployment, 2) Monitoring configuration, 3) Alert management, 4) Data source automation, 5) Visualization management. This automates observability dashboard management."
+            },
+            {
+                id: 167,
+                question: "What are Azure DevOps pipeline service containers?",
+                answer: "Service containers run background services: 1) Database services, 2) Cache servers, 3) Message brokers, 4) Testing dependencies, 5) Custom services. Service containers provide dependencies for pipeline jobs."
+            },
+            {
+                id: 168,
+                question: "How do you implement digital sovereignty in DevOps?",
+                answer: "Digital sovereignty: 1) Data residency compliance, 2) Local infrastructure, 3) Regulatory requirements, 4) Cross-border data flow management, 5) Sovereignty-by-design. This ensures compliance with regional data laws."
+            },
+            {
+                id: 169,
+                question: "What are Azure DevOps repository sparse checkouts?",
+                answer: "Sparse checkouts fetch only specific paths: 1) Large monorepos, 2) Partial workspace, 3) Performance optimization, 4) Selective development, 5) Resource constraints. Sparse checkouts manage large repositories efficiently."
+            },
+            {
+                id: 170,
+                question: "Explain Azure DevOps integration with Azure Chaos Studio.",
+                answer: "Chaos Studio integration: 1) Controlled fault injection, 2) Resilience testing, 3) Failure scenario simulation, 4) Recovery validation, 5) Chaos engineering automation. This systematically improves system reliability."
+            },
+            {
+                id: 171,
+                question: "What are Azure DevOps pipeline environments resources?",
+                answer: "Environment resources track deployment targets: 1) Kubernetes clusters, 2) Virtual machines, 3) App Services, 4) Database servers, 5) Custom resources. Resources provide deployment target visibility and management."
+            },
+            {
+                id: 172,
+                question: "How do you implement sustainable DevOps?",
+                answer: "Sustainable DevOps: 1) Carbon-aware scheduling, 2) Energy-efficient infrastructure, 3) Resource optimization, 4) Environmental impact tracking, 5) Green software practices. This reduces environmental impact of DevOps operations."
+            },
+            {
+                id: 173,
+                question: "What are Azure DevOps repository worktree pruning?",
+                answer: "Worktree pruning removes unused worktrees: 1) Cleanup automation, 2) Storage optimization, 3) Workspace management, 4) Resource reclamation, 5) Maintenance automation. Pruning keeps development environments organized."
+            },
+            {
+                id: 174,
+                question: "Explain Azure DevOps integration with Azure OpenAI Service.",
+                answer: "OpenAI Service integration: 1) AI-assisted development, 2) Code generation, 3) Documentation automation, 4) Test case generation, 5) Intelligent automation. This enhances DevOps with AI capabilities."
+            },
+            {
+                id: 175,
+                question: "What are Azure DevOps pipeline deployment strategies for databases?",
+                answer: "Database deployment strategies: 1) Migration-based deployment, 2) State-based deployment, 3) Hybrid approaches, 4) Blue-green for databases, 5) Rollback strategies. Database deployments require special consideration for data integrity."
+            },
+            {
+                id: 176,
+                question: "How do you implement zero trust in DevOps?",
+                answer: "Zero trust implementation: 1) Identity verification, 2) Device health checks, 3) Least privilege access, 4) Micro-segmentation, 5) Continuous monitoring. Zero trust assumes no implicit trust in DevOps processes."
+            },
+            {
+                id: 177,
+                question: "What are Azure DevOps repository bundle verification?",
+                answer: "Bundle verification ensures integrity: 1) Cryptographic signatures, 2) Content validation, 3) History consistency, 4) Object integrity, 5) Trust establishment. Verification ensures bundle reliability and security."
+            },
+            {
+                id: 178,
+                question: "Explain Azure DevOps integration with Azure Deployment Environments.",
+                answer: "Deployment Environments integration: 1) Environment provisioning, 2) Template management, 3) Resource governance, 4) Cost control, 5) Self-service environments. This manages development and testing environments."
+            },
+            {
+                id: 179,
+                question: "What are Azure DevOps pipeline container image resources?",
+                answer: "Container image resources track base images: 1) Image versioning, 2) Security scanning, 3) Dependency tracking, 4) Update automation, 5) Compliance monitoring. Resources manage container image lifecycle."
+            },
+            {
+                id: 180,
+                question: "How do you implement DevSecOps maturity model?",
+                answer: "DevSecOps maturity levels: 1) Initial (manual security), 2) Managed (basic automation), 3) Defined (integrated security), 4) Measured (metrics-driven), 5) Optimized (continuous improvement). Maturity model guides security integration evolution."
+            },
+            {
+                id: 181,
+                question: "What are Azure DevOps repository attribute macros?",
+                answer: "Attribute macros expand to dynamic values: 1) Environment-specific settings, 2) User-specific configurations, 3) Conditional processing, 4) Template expansion, 5) Custom macros. Macros enable dynamic Git attribute configuration."
+            },
+            {
+                id: 182,
+                question: "Explain Azure DevOps integration with Azure Health Bot.",
+                answer: "Health Bot integration: 1) Healthcare compliance, 2) Medical data handling, 3) HIPAA compliance automation, 4) Patient communication workflows, 5) Healthcare-specific deployments. This supports healthcare DevOps requirements."
+            },
+            {
+                id: 183,
+                question: "What are Azure DevOps pipeline deployment rings for machine learning?",
+                answer: "ML deployment rings: 1) Internal model testing, 2) Limited user exposure, 3) Performance monitoring, 4) Bias detection, 5) Gradual rollout. Rings manage risk in machine learning model deployment."
+            },
+            {
+                id: 184,
+                question: "How do you implement blockchain oracle DevOps?",
+                answer: "Blockchain oracle DevOps: 1) Oracle deployment automation, 2) Data feed management, 3) External data validation, 4) Smart contract coordination, 5) Oracle network management. This manages blockchain oracles and data feeds."
+            },
+            {
+                id: 185,
+                question: "What are Azure DevOps repository notes namespaces?",
+                answer: "Notes namespaces organize Git notes: 1) Team-specific notes, 2) Tool-specific annotations, 3) Environment-specific information, 4) Custom categories, 5) Access control. Namespaces manage note organization and access."
+            },
+            {
+                id: 186,
+                question: "Explain Azure DevOps integration with Azure Quantum.",
+                answer: "Quantum integration: 1) Quantum job submission, 2) Quantum resource management, 3) Algorithm deployment, 4) Result processing, 5) Quantum development lifecycle. This manages quantum computing workflows."
+            },
+            {
+                id: 187,
+                question: "What are Azure DevOps pipeline runtime resources?",
+                answer: "Runtime resources available during execution: 1) System capabilities, 2) Environment variables, 3) Agent information, 4) Pipeline context, 5) Custom resources. Resources provide execution context to pipeline steps."
+            },
+            {
+                id: 188,
+                question: "How do you implement metaverse DevOps?",
+                answer: "Metaverse DevOps: 1) 3D content deployment, 2) Virtual world management, 3) Avatar system updates, 4) Spatial computing, 5) Cross-platform experiences. This manages metaverse and virtual environment development."
+            },
+            {
+                id: 189,
+                question: "What are Azure DevOps repository bundle thin packs?",
+                answer: "Bundle thin packs optimize transfer: 1) Delta compression, 2) Network efficiency, 3) Incremental updates, 4) Bandwidth optimization, 5) Large object handling. Thin packs improve bundle transfer performance."
+            },
+            {
+                id: 190,
+                question: "Explain Azure DevOps integration with Azure Orbital.",
+                answer: "Orbital integration: 1) Satellite communication automation, 2) Ground station management, 3) Space data processing, 4) Satellite deployment workflows, 5) Space system operations. This manages space and satellite systems."
+            },
+            {
+                id: 191,
+                question: "What are Azure DevOps pipeline deployment strategies for microservices?",
+                answer: "Microservices deployment strategies: 1) Canary release per service, 2) Service mesh integration, 3) Dependency management, 4) Rollback coordination, 5) Traffic shifting. Microservices require coordinated deployment approaches."
+            },
+            {
+                id: 192,
+                question: "How do you implement post-quantum cryptography in DevOps?",
+                answer: "Post-quantum cryptography: 1) Algorithm migration planning, 2) Cryptographic agility, 3) Key management updates, 4) Performance impact assessment, 5) Compliance requirements. This prepares for quantum computing era security."
+            },
+            {
+                id: 193,
+                question: "What are Azure DevOps repository graft points?",
+                answer: "Graft points connect history timelines: 1) Project merger coordination, 2) Legacy system integration, 3) Historical preservation, 4) Timeline unification, 5) Branch relationship management. Graft points manage complex history relationships."
+            },
+            {
+                id: 194,
+                question: "Explain Azure DevOps integration with Azure PlayFab.",
+                answer: "PlayFab integration: 1) Game backend deployment, 2) Player data management, 3) Game server orchestration, 4) Live operations automation, 5) Gaming analytics. This manages game development and operations."
+            },
+            {
+                id: 195,
+                question: "What are Azure DevOps pipeline environment protection rules?",
+                answer: "Environment protection rules: 1) Required approvals, 2) Health checks, 3) Security scans, 4) Compliance validation, 5) Custom checks. Protection rules ensure environment integrity and compliance."
+            },
+            {
+                id: 196,
+                question: "How do you implement Web3 DevOps?",
+                answer: "Web3 DevOps: 1) Smart contract deployment, 2) Blockchain node management, 3) Decentralized application deployment, 4) Token management, 5) Web3 infrastructure automation. This manages blockchain and decentralized systems."
+            },
+            {
+                id: 197,
+                question: "What are Azure DevOps repository mailmap inheritance?",
+                answer: "Mailmap inheritance cascades configurations: 1) Organizational standards, 2) Team-specific overrides, 3) Project-level customization, 4) User preferences, 5) Hierarchical configuration. Inheritance manages mailmap at scale."
+            },
+            {
+                id: 198,
+                question: "Explain Azure DevOps integration with Azure Confidential Ledger.",
+                answer: "Confidential Ledger integration: 1) Immutable audit trails, 2) Secure transaction logging, 3) Compliance evidence, 4) Tamper-proof records, 5) Regulatory reporting. This provides secure, immutable logging for DevOps."
+            },
+            {
+                id: 199,
+                question: "What are Azure DevOps pipeline deployment strategies for AI models?",
+                answer: "AI model deployment strategies: 1) Shadow deployment, 2) A/B testing for models, 3) Canary release for inference, 4) Model performance monitoring, 5) Rollback strategies. AI deployment requires specialized approaches for model management."
+            },
+            {
+                id: 200,
+                question: "How do you implement quantum DevOps?",
+                answer: "Quantum DevOps: 1) Quantum circuit testing, 2) Quantum job orchestration, 3) Quantum resource optimization, 4) Hybrid quantum-classical workflows, 5) Quantum algorithm validation. This manages the complete quantum development lifecycle from simulation to actual quantum hardware execution."
+            }
+        ];
+
+        // Track completed questions
+        let completedQuestions = new Set();
+
+        // Initialize the course
+        function initializeCourse() {
+            const container = document.getElementById('questionsContainer');
+            
+            azureDevOpsQuestions.forEach(q => {
+                const questionCard = document.createElement('div');
+                questionCard.className = 'question-card';
+                questionCard.id = `question-${q.id}`;
+                questionCard.innerHTML = `
+                    <div class="question-header">
+                        <div class="question-number">${q.id}</div>
+                        <div class="question-text">${q.question}</div>
+                    </div>
+                    <div class="answer-section">
+                        <button class="answer-toggle" onclick="toggleAnswer(${q.id})">
+                            <i class="fas fa-chevron-down"></i> Show Answer
+                        </button>
+                        <div class="answer-content" id="answer-${q.id}">
+                            ${q.answer}
+                        </div>
+                    </div>
+                `;
+                container.appendChild(questionCard);
+            });
+
+            updateProgress();
+        }
+
+        // Toggle answer visibility
+        function toggleAnswer(questionId) {
+            const answer = document.getElementById(`answer-${questionId}`);
+            const questionCard = document.getElementById(`question-${questionId}`);
+            const toggleBtn = answer.previousElementSibling;
+            
+            if (answer.classList.contains('show')) {
+                answer.classList.remove('show');
+                toggleBtn.innerHTML = '<i class="fas fa-chevron-down"></i> Show Answer';
+            } else {
+                answer.classList.add('show');
+                toggleBtn.innerHTML = '<i class="fas fa-chevron-up"></i> Hide Answer';
+                questionCard.classList.add('completed');
+                
+                // Mark question as completed
+                if (!completedQuestions.has(questionId)) {
+                    completedQuestions.add(questionId);
+                    updateProgress();
+                }
+            }
+        }
+
+        // Update progress bar
+        function updateProgress() {
+            const progress = (completedQuestions.size / azureDevOpsQuestions.length) * 100;
+            const progressFill = document.getElementById('progressFill');
+            const progressPercent = document.getElementById('progressPercent');
+            
+            progressFill.style.width = `${progress}%`;
+            progressPercent.textContent = `${Math.round(progress)}%`;
+            
+            // Show completion section when all questions are completed
+            if (completedQuestions.size === azureDevOpsQuestions.length) {
+                document.getElementById('completionSection').style.display = 'block';
+            }
+        }
+
+        // Mark all questions as read
+        function markAllRead() {
+            azureDevOpsQuestions.forEach(q => {
+                completedQuestions.add(q.id);
+                const questionCard = document.getElementById(`question-${q.id}`);
+                questionCard.classList.add('completed');
+            });
+            updateProgress();
+            alert('All 200 questions marked as completed! You can now generate your certificate.');
+        }
+
+        // Search questions
+        function searchQuestions() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const questions = document.getElementsByClassName('question-card');
+            let found = false;
+            
+            for (let question of questions) {
+                const questionText = question.querySelector('.question-text').textContent.toLowerCase();
+                if (questionText.includes(searchTerm)) {
+                    question.style.display = 'block';
+                    if (!found) {
+                        question.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        found = true;
+                    }
+                } else {
+                    question.style.display = 'none';
+                }
+            }
+            
+            if (!found && searchTerm) {
+                alert('No questions found matching your search.');
+            }
+        }
+
+        // Scroll to top
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Certificate functions
+        function showCertificateModal() {
+            document.getElementById('certificateModal').classList.add('show');
+        }
+
+        function closeCertificateModal() {
+            document.getElementById('certificateModal').classList.remove('show');
+        }
+
+        function generateCertificate() {
+            const name = document.getElementById('studentName').value;
+            const email = document.getElementById('studentEmail').value;
+            
+            if (!name || !email) {
+                alert('Please enter your name and email');
+                return;
+            }
+            
+            // Update certificate with user details
+            document.getElementById('certificateName').textContent = name;
+            
+            // Generate certificate ID
+            const certId = `AZD-${new Date().getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`;
+            document.getElementById('certificateId').textContent = certId;
+            
+            // Set completion date
+            const today = new Date();
+            document.getElementById('completionDate').textContent = today.toLocaleDateString('en-IN', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric'
+            });
+            
+            // Show certificate preview
+            document.getElementById('certificateForm').style.display = 'none';
+            document.getElementById('certificatePreview').classList.add('show');
+        }
+
+        function downloadCertificate() {
+            const certificateData = {
+                name: document.getElementById('certificateName').textContent,
+                certId: document.getElementById('certificateId').textContent,
+                date: document.getElementById('completionDate').textContent,
+                validUntil: '30 June 2027',
+                course: 'Azure DevOps Master Course - 200 Interview Questions',
+                completion: 'Successfully completed all 200 Azure DevOps interview questions',
+                issuer: 'TechMaster - Azure DevOps Certification Authority'
+            };
+            
+            const blob = new Blob([JSON.stringify(certificateData, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `Azure-DevOps-Certificate-${certificateData.certId}.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            alert('Certificate downloaded successfully! You can now showcase your Azure DevOps expertise.');
+        }
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', initializeCourse);
+    </script>
+</body>
+</html>
