@@ -1,0 +1,27 @@
+{
+  "name": "azure-devops-course",
+  "version": "1.0.0",
+  "description": "Azure DevOps Master Course with 200 Interview Questions and Certificate",
+  "main": "index.html",
+  "scripts": {
+    "build": "echo 'No build process needed for static site'",
+    "dev": "live-server --port=3000",
+    "start": "echo 'Open index.html in browser'"
+  },
+  "keywords": [
+    "azure-devops",
+    "interview-questions",
+    "certification",
+    "course"
+  ],
+  "author": "TechMaster",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/azure-devops-course.git"
+  },
+  "homepage": "https://your-azure-devops-course.netlify.app",
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  }
+}
